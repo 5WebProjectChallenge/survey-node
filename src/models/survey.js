@@ -1,17 +1,30 @@
-const user = (sequelize,DataTypes) => {
-    const User = sequelize.define(
-        'user',
+const survey = (sequelize,DataTypes) => {
+    const Survey = sequelize.define(
+        'survey',
         {
             id:{
                 type:DataTypes.INTEGER,
                 primaryKey:true,
                 autoIncrement:true
             },
-            username:{
+            name:{
+                type:DataTypes.STRING,
+            },
+            educationLevel:{
+                type:DataTypes.STRING,
+            },
+            skills:{
+                type:DataTypes.STRING,
+            },
+            gender:{
+                type:DataTypes.STRING,
+            },
+            number:{
                 type:DataTypes.STRING,
                 unique:true
+
             },
-            password:{
+            email:{
                 type:DataTypes.STRING,
             }
         },{
@@ -20,8 +33,8 @@ const user = (sequelize,DataTypes) => {
         }
     );
 
-    User.sync()
-    return User 
+    Survey.sync()
+    return Survey 
 }
 
-export default user 
+export default survey 

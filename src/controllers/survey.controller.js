@@ -19,7 +19,7 @@ exports.addSurvey = async (req, res) => {
 
         // check if number is not in db
         try {
-            const entryWithSameNumber = await survey.findOne({
+            const entryWithSameNumber = await Survey.findOne({
                 where: {
                     number
                 }
@@ -32,9 +32,9 @@ exports.addSurvey = async (req, res) => {
                         message: "You are not allowed to enter survey again!!!"
                     })
             } else {
-                await User.create({
+                await Survey.create({
                     name,
-                    edu_lvl,
+                    educationLevel:edu_lvl,
                     skills,
                     gender,
                     number,
@@ -47,7 +47,7 @@ exports.addSurvey = async (req, res) => {
                 })
             }
         } catch (e) {
-
+            console.log(e)
             res.status(500)
                 .send({
                     error: true,
@@ -61,11 +61,7 @@ exports.addSurvey = async (req, res) => {
 
 exports.getSurvey = async (req, res) => {
     try {
-        const surveys = await survey.findOne({
-            where: {
-                number
-            }
-        })
+        const surveys = await Survey.findAll()
         res.send({
             error: false,
             message: "Got the data",
@@ -73,7 +69,7 @@ exports.getSurvey = async (req, res) => {
         })
 
     } catch (e) {
-
+        console.log(e)
         res.status(500)
             .send({
                 error: true,

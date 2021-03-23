@@ -1,4 +1,4 @@
-const survey = require('./survey')
+import survey from './survey'
 
 export default {
     survey

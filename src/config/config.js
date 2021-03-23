@@ -1,6 +1,6 @@
 require('dotenv/config')
 
-console.log("process-1",process.env)
+
 
 module.exports = {
   development: {

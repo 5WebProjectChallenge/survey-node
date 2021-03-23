@@ -7,7 +7,7 @@ import helmet from 'helmet' // For setting security headers
 // const session = require('express-session')
 
 import routes from './routes'
-// import { isAuthenticated } from './utils/isAuth'
+import isAuthenticated from './utils/isAuth'
 
 const app = express()
 
@@ -24,9 +24,8 @@ app.use(morgan('combined'))
 app.use(express.json('limit','50mb'))
 app.use(express.urlencoded({extended:true,limit:'50mb'}))
 
-console.log(routes.survey)
 
-// app.use('/user',isAuthenticated,routes.survey)
+app.use('/user',routes.survey)
 
 app.use((req,res)=>{
     res.status(404).send('404 page not found')
