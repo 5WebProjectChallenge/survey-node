@@ -5,9 +5,12 @@ import express from 'express'
 import morgan from 'morgan' // For logging
 import helmet from 'helmet' // For setting security headers
 // const session = require('express-session')
+var cors = require('cors')
 
 import routes from './routes'
 import isAuthenticated from './utils/isAuth'
+
+// can add specific url
 
 const app = express()
 
@@ -17,6 +20,7 @@ const app = express()
 //   saveUninitialized: true,
 //   cookie: { secure: true }
 // }))
+app.use(cors())
 
 app.use(helmet())
 app.use(morgan('combined'))
