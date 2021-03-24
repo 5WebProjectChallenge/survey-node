@@ -1,5 +1,6 @@
 const db = require('../models')
 // console.log(db)
+const { Op } = require('sequelize')
 
 const Survey = db.survey
 
@@ -34,7 +35,7 @@ exports.addSurvey = async (req, res) => {
             } else {
                 await Survey.create({
                     name,
-                    educationLevel:edu_lvl,
+                    educationLevel: edu_lvl,
                     skills,
                     gender,
                     number,
@@ -60,8 +61,19 @@ exports.addSurvey = async (req, res) => {
 }
 
 exports.getSurvey = async (req, res) => {
+
+    const { from } = req.params
+    console.log("from", from)
     try {
-        const surveys = await Survey.findAll()
+        const surveys = await Survey.findAll({
+            where: {
+                id: {
+                    [Op.lt]: parseInt(from,10)
+                }
+            },
+            order: [["id", "DESC"]],
+            limit: 2
+        })
         res.send({
             error: false,
             message: "Got the data",
